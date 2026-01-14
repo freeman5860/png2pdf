@@ -78,10 +78,24 @@ export class PDFConverter {
                     compression = 'FAST';
                 }
 
+                // 根据文件类型确定图片格式
+                let imageFormat = 'PNG';
+                if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                    imageFormat = 'JPEG';
+                } else if (file.type === 'image/png') {
+                    imageFormat = 'PNG';
+                } else if (file.type === 'image/webp') {
+                    imageFormat = 'WEBP';
+                } else if (file.type === 'image/bmp') {
+                    imageFormat = 'BMP';
+                } else if (file.type === 'image/gif') {
+                    imageFormat = 'GIF';
+                }
+
                 // 添加图片到PDF
                 pdf.addImage(
                     dataURL,
-                    'PNG',
+                    imageFormat,
                     x,
                     y,
                     finalWidth,
@@ -98,7 +112,7 @@ export class PDFConverter {
 
         // 生成文件名
         const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
-        const fileName = `PNG转PDF_${timestamp}.pdf`;
+        const fileName = `图片转PDF_${timestamp}.pdf`;
 
         // 保存PDF
         pdf.save(fileName);

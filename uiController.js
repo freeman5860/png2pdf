@@ -8,7 +8,7 @@ export class UIController {
     }
 
     showWelcome() {
-        console.log('PNG转PDF工具已就绪');
+        console.log('图片转PDF工具已就绪');
     }
 
     displayPreview(files, removeCallback) {

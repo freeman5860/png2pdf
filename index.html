@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PNG转PDF - 在线图片转换工具</title>
+    <title>图片转PDF - 在线图片转换工具</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/25440112-078b-4d6d-b761-087b363b70be/image_1768381044_1_1.png" alt="PDF图标" class="w-10 h-10">
-                    <h1 class="text-2xl font-bold text-indigo-600">PNG转PDF工具</h1>
+                    <h1 class="text-2xl font-bold text-indigo-600">图片转PDF工具</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button class="text-gray-600 hover:text-indigo-600 transition-colors">
@@ -33,8 +33,8 @@
         <!-- 功能介绍卡片 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
             <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">快速将PNG图片转换为PDF</h2>
-                <p class="text-lg text-gray-600">支持批量上传、拖拽操作、自定义设置，完全免费且安全</p>
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">快速将图片转换为PDF</h2>
+                <p class="text-lg text-gray-600">支持PNG、JPG、JPEG、WebP、BMP、GIF等常用格式，批量上传、拖拽操作、自定义设置，完全免费且安全</p>
             </div>
 
             <!-- 特性展示 -->
@@ -61,12 +61,12 @@
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
             <div id="dropZone" class="border-4 border-dashed border-indigo-300 rounded-xl p-12 text-center bg-indigo-50 hover:bg-indigo-100 transition-colors cursor-pointer">
                 <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/bad0d740-2a6b-447b-87a7-159b7b12caf8/image_1768381040_1_1.png" alt="上传图标" class="w-24 h-24 mx-auto mb-4 opacity-60">
-                <h3 class="text-2xl font-semibold text-gray-700 mb-2">拖拽PNG图片到这里</h3>
-                <p class="text-gray-500 mb-4">或者点击选择文件</p>
+                <h3 class="text-2xl font-semibold text-gray-700 mb-2">拖拽图片到这里</h3>
+                <p class="text-gray-500 mb-4">支持PNG、JPG、JPEG、WebP、BMP、GIF格式</p>
                 <button id="selectBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg">
-                    选择PNG文件
+                    选择图片文件
                 </button>
-                <input type="file" id="fileInput" accept="image/png" multiple class="hidden">
+                <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/webp,image/bmp,image/gif" multiple class="hidden">
             </div>
 
             <!-- 转换设置 -->
@@ -133,7 +133,7 @@
                         <span class="text-2xl font-bold text-indigo-600">1</span>
                     </div>
                     <h4 class="font-semibold text-gray-800 mb-2">选择文件</h4>
-                    <p class="text-sm text-gray-600">点击或拖拽PNG图片到上传区域</p>
+                    <p class="text-sm text-gray-600">点击或拖拽图片到上传区域</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -163,7 +163,7 @@
     <!-- 页脚 -->
     <footer class="bg-white mt-12 py-6 border-t border-gray-200">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-600 mb-2">© 2026 PNG转PDF工具 - 快速、安全、免费</p>
+            <p class="text-gray-600 mb-2">© 2026 图片转PDF工具 - 快速、安全、免费</p>
             <p>由 <a href="https://with.woa.com/" style="color: #8A2BE2;" target="_blank">with</a> 通过自然语言生成</p>
         </div>
     </footer>

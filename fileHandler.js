@@ -2,7 +2,14 @@
 export class FileHandler {
     constructor() {
         this.maxFileSize = 10 * 1024 * 1024; // 10MB
-        this.allowedTypes = ['image/png'];
+        this.allowedTypes = [
+            'image/png',
+            'image/jpeg',
+            'image/jpg',
+            'image/webp',
+            'image/bmp',
+            'image/gif'
+        ];
     }
 
     validateFiles(files) {
@@ -11,7 +18,7 @@ export class FileHandler {
 
         for (const file of fileArray) {
             if (!this.allowedTypes.includes(file.type)) {
-                console.warn(`文件 ${file.name} 不是PNG格式，已跳过`);
+                console.warn(`文件 ${file.name} 不是支持的图片格式，已跳过`);
                 continue;
             }
 

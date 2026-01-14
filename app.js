@@ -71,7 +71,7 @@ class App {
         const validFiles = this.fileHandler.validateFiles(files);
         
         if (validFiles.length === 0) {
-            this.uiController.showError('请选择有效的PNG图片文件');
+            this.uiController.showError('请选择有效的图片文件');
             return;
         }
 
@@ -104,7 +104,7 @@ class App {
 
     async convertToPDF() {
         if (this.selectedFiles.length === 0) {
-            this.uiController.showError('请先选择要转换的PNG图片');
+            this.uiController.showError('请先选择要转换的图片');
             return;
         }
 
