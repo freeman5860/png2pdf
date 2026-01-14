@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG转PDF - 在线图片转换工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/25440112-078b-4d6d-b761-087b363b70be/image_1768381044_1_1.png" alt="PDF图标" class="w-10 h-10">
+                    <h1 class="text-2xl font-bold text-indigo-600">PNG转PDF工具</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-indigo-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 功能介绍卡片 -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">快速将PNG图片转换为PDF</h2>
+                <p class="text-lg text-gray-600">支持批量上传、拖拽操作、自定义设置，完全免费且安全</p>
+            </div>
+
+            <!-- 特性展示 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
+                    <div class="text-4xl mb-3">🚀</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">快速转换</h3>
+                    <p class="text-gray-600">秒级完成转换，无需等待</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
+                    <div class="text-4xl mb-3">🔒</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">安全可靠</h3>
+                    <p class="text-gray-600">本地处理，不上传服务器</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
+                    <div class="text-4xl mb-3">📦</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">批量处理</h3>
+                    <p class="text-gray-600">支持多张图片一次转换</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 上传区域 -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div id="dropZone" class="border-4 border-dashed border-indigo-300 rounded-xl p-12 text-center bg-indigo-50 hover:bg-indigo-100 transition-colors cursor-pointer">
+                <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/bad0d740-2a6b-447b-87a7-159b7b12caf8/image_1768381040_1_1.png" alt="上传图标" class="w-24 h-24 mx-auto mb-4 opacity-60">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-2">拖拽PNG图片到这里</h3>
+                <p class="text-gray-500 mb-4">或者点击选择文件</p>
+                <button id="selectBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg">
+                    选择PNG文件
+                </button>
+                <input type="file" id="fileInput" accept="image/png" multiple class="hidden">
+            </div>
+
+            <!-- 转换设置 -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">页面方向</label>
+                    <select id="orientation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <option value="portrait">纵向</option>
+                        <option value="landscape">横向</option>
+                    </select>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">页面大小</label>
+                    <select id="pageSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                        <option value="legal">Legal</option>
+                    </select>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">图片质量</label>
+                    <select id="quality" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <option value="high">高质量</option>
+                        <option value="medium" selected>中等质量</option>
+                        <option value="low">低质量</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 预览区域 -->
+        <div id="previewSection" class="bg-white rounded-2xl shadow-xl p-8 mb-8 hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">已选择的图片</h3>
+                <div class="flex space-x-3">
+                    <button id="clearBtn" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                        清空
+                    </button>
+                    <button id="convertBtn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors shadow-lg">
+                        转换为PDF
+                    </button>
+                </div>
+            </div>
+            <div id="previewGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- 预览图片将动态插入这里 -->
+            </div>
+        </div>
+
+        <!-- 进度条 -->
+        <div id="progressSection" class="bg-white rounded-2xl shadow-xl p-8 mb-8 hidden">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">转换进度</h3>
+            <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                <div id="progressBar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p id="progressText" class="text-center text-gray-600 mt-2">准备中...</p>
+        </div>
+
+        <!-- 使用指南 -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">使用指南</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">1</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">选择文件</h4>
+                    <p class="text-sm text-gray-600">点击或拖拽PNG图片到上传区域</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">2</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">调整设置</h4>
+                    <p class="text-sm text-gray-600">根据需要调整页面方向和大小</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-green-600">3</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">开始转换</h4>
+                    <p class="text-sm text-gray-600">点击转换按钮开始处理</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-blue-600">4</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">下载PDF</h4>
+                    <p class="text-sm text-gray-600">转换完成后自动下载PDF文件</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white mt-12 py-6 border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-600 mb-2">© 2026 PNG转PDF工具 - 快速、安全、免费</p>
+            <p>由 <a href="https://with.woa.com/" style="color: #8A2BE2;" target="_blank">with</a> 通过自然语言生成</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
